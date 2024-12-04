@@ -1,90 +1,129 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
-
+/* Reiniciar estilos predeterminados del navegador */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Estilo para el cuerpo de la página */
 body {
-  background: #fdfdfd;
-  font-family: "Nunito", sans-serif;
-  font-size: 1rem;
-}
-
-main {
-  max-width: 900px;
-  margin: auto;
-  padding: 1rem;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-nav h1 {
-  color: #e74c3c;
+  font-family: 'Rubik', sans-serif;
+  background-color: #f5f5f5; /* Gris claro de fondo */
+  color: #333;
+  padding: 20px;
   margin: 0;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-}
-
-nav li {
-  margin-left: 1rem;
-  color: #34495e;
-  font-weight: bold;
-}
-
+/* Contenedor principal */
 .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  grid-gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  padding: 1rem 0;
-}
-
-.card {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: #fff;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
   border-radius: 10px;
-  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card--avatar {
-  width: 100%;
-  height: 10rem;
-  object-fit: cover;
+/* Estilo para el título principal */
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #e74c3c; /* Naranja oscuro */
+  margin-bottom: 30px;
 }
 
-.card--title {
-  color: #222;
-  font-weight: 700;
-  text-transform: capitalize;
-  font-size: 1.1rem;
-  margin-top: 0.5rem;
+/* Estilo para el formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
-.card--link {
-  text-decoration: none;
-  background: #db4938;
-  color: #fff;
-  padding: 0.3rem 1rem;
-  border-radius: 20px;
-  margin-top: 0.5rem;
-  transition: background 0.3s;
+/* Estilo para el campo de entrada de tarea */
+#task-input {
+  width: 35%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
 }
 
-.card--link:hover {
-  background: #e74c3c;
+/* Estilo para el campo de entrada cuando está en focus */
+#task-input:focus {
+  border-color: #e74c3c; /* Naranja */
+  outline: none;
+}
+
+/* Estilo para el botón de agregar tarea */
+button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #e74c3c; /* Naranja */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 25%;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #c0392b; /* Naranja oscuro */
+}
+
+/* Estilo para la lista de tareas */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+/* Estilo para cada tarea en la lista */
+li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li button {
+  background-color: #d9534f; /* Rojo suave */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+li button:hover {
+  background-color: #c0392b; /* Rojo más oscuro */
+}
+
+/* Estilos para el formulario en dispositivos pequeños */
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
+  #task-input {
+    font-size: 1rem;
+  }
 }

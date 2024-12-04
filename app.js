@@ -1,30 +1,52 @@
-const container = document.querySelector(".container");
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+        .then((registration) => {
+            console.log('Service Worker registrado:', registration);
+        })
+        .catch((error) => {
+            console.error('Error al registrar el Service Worker:', error);
+        });
+}
 
-const movies = [
-  { name: "Inception", image: "images/movie1.jpg" },
-  { name: "The Dark Knight", image: "images/movie2.jpg" },
-  { name: "Interstellar", image: "images/movie3.jpg" },
-  { name: "Dunkirk", image: "images/movie4.jpg" },
-  { name: "Tenet", image: "images/movie5.jpg" },
-  { name: "The Prestige", image: "images/movie6.jpg" },
-  { name: "Memento", image: "images/movie7.jpg" },
-  { name: "Batman Begins", image: "images/movie8.jpg" },
-  { name: "Insomnia", image: "images/movie9.jpg" },
-];
+document.getElementById('task-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const taskInput = document.getElementById('task-input');
+    const task = taskInput.value;
 
-const showMovies = () => {
-  let output = "";
-  movies.forEach(
-    ({ name, image }) =>
-      (output += `
-        <div class="card">
-          <img class="card--avatar" src="${image}" alt="${name} Poster" />
-          <h1 class="card--title">${name}</h1>
-          <a class="card--link" href="#">Details</a>
-        </div>
-      `)
-  );
-  container.innerHTML = output;
-};
+    if (task) {
+        // Agregar tarea a la lista
+        const taskList = document.getElementById('task-list');
+        const listItem = document.createElement('li');
+        listItem.textContent = task;
+        taskList.appendChild(listItem);
 
-document.addEventListener("DOMContentLoaded", showMovies);
+        // Limpiar campo de entrada
+        taskInput.value = '';
+
+        // Mostrar notificación
+        if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification('Nueva tarea agregada', { body: task });
+        } else if ('Notification' in window && Notification.permission !== 'denied') {
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    new Notification('Nueva tarea agregada', { body: task });
+                }
+            });
+        }
+    }
+});
+
+// Verificar si el navegador soporta notificaciones y pedir permiso una sola vez
+if ('Notification' in window && Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+    Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+            console.log('Permiso de notificación concedido.');
+        } else {
+            console.log('Permiso de notificación denegado.');
+        }
+    }).catch(error => {
+        console.error('Error al solicitar permisos de notificación:', error);
+    });
+} else {
+    console.log('El navegador no soporta notificaciones o ya se ha decidido el permiso.');
+}
